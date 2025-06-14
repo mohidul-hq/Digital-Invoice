@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toWords } from "number-to-words";
 import "./App.css";
 import logo from "./assets/Resources/Images/logo.png";
 import paid from "./assets/Resources/Images/paid.png";
@@ -20,7 +21,7 @@ const suggestions = [
     hsn: "",
   },
   {
-    icon: "📎",
+    icon: "📄",
     description: "Photo Cope",
     qty: 50,
     rate: 2,
@@ -99,18 +100,18 @@ function App() {
 
   // Add this at the top with your other useState hooks:
   const [author, setAuthor] = useState("Mohidul Haque");
-  
+
   // Handle client info
   const handleClientChange = (e) => {
     const { name, value } = e.target;
     setClient({ ...client, [name]: value });
   };
-  
+
   const funPrint = (e) => {
     e.preventDefault();
     print();
   };
-  
+
   // Handle author radio change
   const handleAuthorRadio = (e) => {
     setAuthor(e.target.value);
@@ -170,27 +171,27 @@ function App() {
             Invoice to client
           </label>
           <label className="flex items-center gap-2 font-medium print:hidden text-xl text--400">
-  <input
-    type="radio"
-    name="Person"
-    value="Mohidul Haque"
-    checked={author === "Mohidul Haque"}
-    onChange={handleAuthorRadio}
-    className="accent-blue-600 print:hidden"
-  />
-  Mohidul
-</label>
-<label className="flex items-center gap-2 font-medium print:hidden text-xl text--400">
-  <input
-    type="radio"
-    name="Person"
-    value="Abdul Hanif"
-    checked={author === "Abdul Hanif"}
-    onChange={handleAuthorRadio}
-    className="accent-blue-600 print:hidden"
-  />
-  Abdul
-</label>
+            <input
+              type="radio"
+              name="Person"
+              value="Mohidul Haque"
+              checked={author === "Mohidul Haque"}
+              onChange={handleAuthorRadio}
+              className="accent-blue-600 print:hidden"
+            />
+            Mohidul
+          </label>
+          <label className="flex items-center gap-2 font-medium print:hidden text-xl text--400">
+            <input
+              type="radio"
+              name="Person"
+              value="Abdul Hanif"
+              checked={author === "Abdul Hanif"}
+              onChange={handleAuthorRadio}
+              className="accent-blue-600 print:hidden"
+            />
+            Abdul
+          </label>
 
           {showClient && (
             <div className="grid grid-cols-1 md:grid-cols-2  gap-2 mt-2">
@@ -361,61 +362,61 @@ function App() {
 
         {/* QR code / Paid section */}
         <div className="w-full max-w-3xl bg-white px-8 py-6 flex flex-wrap justify-between items-center border-t shadow">
+          {/* Payment Section */}
+          <div className=" flex flex-col items-center px-6 py-4 rounded">
+            <label className="flex items-center gap-2 mb-2 font-medium print:hidden">
+              <input
+                type="checkbox"
+                checked={billPaid}
+                onChange={() => setBillPaid(!billPaid)}
+                className="accent-green-600 print:hidden "
+              />
+              Bill Paid
+            </label>
 
+            {billPaid ? (
+              <img
+                src={paid}
+                alt="Paid"
+                className="w-32 h-32 mb-1 print:block hidden"
+              />
+            ) : (
+              <div>
+                <img
+                  src={qr}
+                  alt="QR Code"
+                  className="w-32 h-32 mb-1 print:block hidden"
+                />
+                <h1 className="text-blue-400 hidden print:block">
+                  8900981511@ybl
+                </h1>
+              </div>
+            )}
+            <div className="text-green-700 font-semibold text-lg mt-2 hidden print:block ">
+              {billPaid
+                ? "Thank you for your payment!"
+                : "Scan to pay instantly"}
+            </div>
 
-  {/* Payment Section */}
-  <div className=" flex flex-col items-center px-6 py-4 rounded">
-    <label className="flex items-center gap-2 mb-2 font-medium print:hidden">
-      <input
-        type="checkbox"
-        checked={billPaid}
-        onChange={() => setBillPaid(!billPaid)}
-        className="accent-green-600 print:hidden "
-      />
-      Bill Paid
-    </label>
-
-    {billPaid ? (
-      <img
-        src={paid}
-        alt="Paid"
-        className="w-32 h-32 mb-1 print:block hidden"
-      />
-    ) : (
-      <div>
-        <img
-        src={qr}
-        
-        alt="QR Code"
-        className="w-32 h-32 mb-1 print:block hidden"
-      />
-      <h1 className="text-blue-400 hidden print:block">8900981511@ybl</h1>
-      </div>  
-    )}
-    <div className="text-green-700 font-semibold text-lg mt-2 hidden print:block ">
-      {billPaid ? "Thank you for your payment!" : "Scan to pay instantly"}
-    </div>
-
-    {/* Print button */}
-    
-  </div>
-  <button
-      onClick={funPrint}
-      className="print:hidden mt-4 relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200"
-    >
-      <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-transparent">
-        🖨️ Print
-      </span>
-    </button>
-    {/* Signature / Authority */}
-    <div className="flex-col items-center px-6 py-4 rounded mr-4 hidden print:flex">
-    <div className="flex-col items-center px-6 py-4 rounded mr-4 hidden print:flex">
-  <h1 className="text-md mb-1 mr-40 ">For,</h1>
-  <p className="uppercase font-bold">{author}</p>
-  <p className="text-sm mt-20">Authorised Signatory</p>
-</div>
-  </div>
-</div>
+            {/* Print button */}
+          </div>
+          <button
+            onClick={funPrint}
+            className="print:hidden mt-4 relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200"
+          >
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-transparent">
+              🖨️ Print
+            </span>
+          </button>
+          {/* Signature / Authority */}
+          <div className="flex-col items-center px-6 py-4 rounded mr-4 hidden print:flex">
+            <div className="flex-col items-center px-6 py-4 rounded mr-4 hidden print:flex">
+              <h1 className="text-md mb-1 mr-40 ">For,</h1>
+              <p className="uppercase font-bold">{author}</p>
+              <p className="text-sm mt-20">Authorised Signatory</p>
+            </div>
+          </div>
+        </div>
 
         {/* Footer section */}
         <div className="w-full max-w-3xl bg-white px-8 py-4 rounded-b-2xl shadow  flex-col gap-2 border-t mt-2 hidden print:block">
@@ -423,13 +424,14 @@ function App() {
             <span className="font-semibold">INR (in words):</span>{" "}
             {grandTotal === 0
               ? "Zero"
-              : `INR ${grandTotal.toLocaleString("en-IN", {
-                  maximumFractionDigits: 0,
-                  style: "decimal",
-                })} Only`}
+              : `${toWords(grandTotal).replace(/\b\w/g, (l) =>
+                  l.toUpperCase()
+                )} Rupees Only`}
           </div>
           <div className="text-gray-700 text-sm">
-            <span className="font-semibold">Terms & Conditions:</span>This invoice is system-generated and does not require a signature. For any queries or support, please contact us at {" "}
+            <span className="font-semibold">Terms & Conditions:</span>This
+            invoice is system-generated and does not require a signature. For
+            any queries or support, please contact us at{" "}
             <span className="underline">+91-8900981511</span>.
           </div>
           <div className="text-blue-700 font-semibold text-center mt-2">
