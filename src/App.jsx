@@ -22,7 +22,7 @@ const suggestions = [
   },
   {
     icon: "📄",
-    description: "Photo Cope",
+    description: "Photo Copy",
     qty: 50,
     rate: 2,
     hsn: "",
