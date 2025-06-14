@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import logo from "./assets/Resources/Images/logo.png";
+import paid from "./assets/Resources/Images/paid.png";
+import qr from "./assets/Resources/Images/QRCode.png";
 
 const suggestions = [
   {
@@ -121,7 +124,7 @@ function App() {
           <div className="flex items-center gap-6">
             <img
               className="rounded-full w-18 h-18 bg-white p-2 shadow"
-              src="src/assets/Resources/Images/logo.png"
+              src={logo}
               alt="Logo"
             />
             <div>
@@ -374,19 +377,19 @@ function App() {
 
     {billPaid ? (
       <img
-        src="src/assets/Resources/Images/paid.png"
+        src={paid}
         alt="Paid"
         className="w-32 h-32 mb-1 print:block hidden"
       />
     ) : (
       <div>
         <img
-        src="src/assets/Resources/Images/QRCode.png"
+        src={qr}
         
         alt="QR Code"
         className="w-32 h-32 mb-1 print:block hidden"
       />
-      <h1 className="text-blue-400">8900981511@ybl</h1>
+      <h1 className="text-blue-400 hidden print:block">8900981511@ybl</h1>
       </div>  
     )}
     <div className="text-green-700 font-semibold text-lg mt-2 hidden print:block ">
