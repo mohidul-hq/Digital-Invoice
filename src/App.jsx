@@ -121,7 +121,7 @@ function App() {
           <div className="flex items-center gap-6">
             <img
               className="rounded-full w-18 h-18 bg-white p-2 shadow"
-              src="../src/assets/Resources/Images/logo.png"
+              src="src/assets/Resources/Images/logo.png"
               alt="Logo"
             />
             <div>
@@ -374,14 +374,14 @@ function App() {
 
     {billPaid ? (
       <img
-        src="./src/assets/Resources/Images/paid.png"
+        src="src/assets/Resources/Images/paid.png"
         alt="Paid"
         className="w-32 h-32 mb-1 print:block hidden"
       />
     ) : (
       <div>
         <img
-        src="./src/assets/Resources/Images/QRCode.png"
+        src="src/assets/Resources/Images/QRCode.png"
         
         alt="QR Code"
         className="w-32 h-32 mb-1 print:block hidden"
